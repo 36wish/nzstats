@@ -1,14 +1,8 @@
 # NZ Statistical Area Explorer
 
-An interactive map for exploring New Zealand's 2023 Census data at the Statistical Area level.
+An interactive map for exploring New Zealand's 2023 Census data.
 
 **Live demo:** https://36wish.github.io/nzstats
-
----
-
-## Screenshot
-
-*(screenshot placeholder)*
 
 ---
 
@@ -28,16 +22,6 @@ An interactive map for exploring New Zealand's 2023 Census data at the Statistic
 ## Running Locally
 
 No build step required. Just open `index.html` in a browser:
-
-```
-# Option 1 — open directly
-open index.html   # macOS
-start index.html  # Windows
-
-# Option 2 — any static file server, e.g. Python
-python -m http.server 8080
-# then visit http://localhost:8080
-```
 
 ## License
 
