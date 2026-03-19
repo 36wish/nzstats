@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NZ Statistical Area Explorer</title>
+  <title>NZ Census Explorer</title>
+  <meta property="og:description" content="Explore 2023 New Zealand census statistics by location — population, ethnicity, housing, income, and more." />
+  <meta property="og:image" content="og.png />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary:      #28fa2b;
-      --primary-dark: #14d617;
+      --primary:      #1fda2b;
+      --primary-dark: #18c025;
       --primary-text: #0b2200;
       --text:         #222;
       --text-light:   #666;
       --bg:           #f0f4f8;
       --card-bg:      #ffffff;
       --border:       #dde3ea;
-      --sa2:          #c05800;
-      --sa3:          #1a3faa;
+      --sa2:          #ffb703;
+      --sa3:          #1221C7;
       --ok:           #1e8449;
       --warn:         #b45309;
       --err:          #c0392b;
-    }
+    }#1221C7
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -37,9 +42,18 @@
       display: flex; align-items: baseline; gap: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,.25);
     }
-    header h1    { font-size: 1.15rem; font-weight: 700; }
-    header small { font-size: 0.75rem; opacity: .65; }
+    header h1    { font-size: 1.5rem; font-weight: 600; 
+      font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+ 
+  }
 
+header small {
+  opacity: .7;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 550;
+}
     /* ── Outer wrapper — flex column so we can reorder on mobile ── */
     .wrap {
       max-width: 1100px; margin: 0 auto; padding: 14px 16px;
@@ -72,7 +86,7 @@
     .btn:disabled { opacity: .55; cursor: not-allowed; }
     .btn-primary { background: var(--primary); color: var(--primary-text); }
     .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
-    .btn-geo { background: #fff; color: #1aaa1d; border: 2px solid var(--primary); }
+    .btn-geo { background: #fff; color: #1fda2b; border: 2px solid var(--primary); }
     .btn-geo:hover:not(:disabled) { background: #f2fff2; }
 
     /* ── Level toggle ── */
@@ -95,7 +109,7 @@
     }
     .lvl-btn:last-child { border-right: none; }
     .lvl-btn:hover:not(.active) { background: var(--bg); color: var(--text); }
-    .lvl-btn.active[data-lvl="SA2"] { background: var(--sa2); color: #fff; }
+    .lvl-btn.active[data-lvl="SA2"] { background: var(--sa2); color: #0b2200; }
     .lvl-btn.active[data-lvl="SA3"] { background: var(--sa3); color: #fff; }
 
     #lvlDesc { font-size: 0.8rem; color: var(--text-light); font-style: italic; }
@@ -182,8 +196,8 @@
       padding: 3px 10px; border-radius: 12px;
       font-size: 0.75rem; font-weight: 700; color: #fff;
     }
-    .lvl-badge.SA2 { background: var(--sa2); }
-    .lvl-badge.SA3 { background: var(--sa3); }
+    .lvl-badge.SA2 { background: var(--sa2); color: #0b2200; }
+    .lvl-badge.SA3 { background: var(--sa3); color: #fff; }
 
     .data-note {
       padding: 8px 0 0;
@@ -242,8 +256,8 @@
     .bar-label { color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .bar-track  { background: var(--border); border-radius: 4px; height: 9px; overflow: hidden; }
     .bar-fill   { height: 100%; border-radius: 4px; transition: width .4s ease; }
-    .bar-fill.blue   { background: #1a6abf; }
-    .bar-fill.teal   { background: #0891b2; }
+    .bar-fill.blue   { background: #2060e1; }
+    .bar-fill.teal   { background: #2060e1; }
     .bar-pct    { font-weight: 700; text-align: right; color: var(--text); }
     .bar-note   { font-size: 0.7rem; color: var(--text-light); margin-top: 8px; font-style: italic; }
 
@@ -252,7 +266,7 @@
       font-size: 0.72rem; color: var(--text-light);
       text-align: center; padding: 6px; line-height: 1.6;
     }
-    .attrib a { color: #1a8a1d; }
+    .attrib a { color: #1fda2b; }
 
     /* ── Mobile: reorder map below stats ── */
     @media (max-width: 700px) {
@@ -273,7 +287,7 @@
 
 <header>
   <div>
-    <h1>NZ Statistical Area Explorer</h1>
+    <h1>NZ Census Explorer</h1>
     <small>2023 Census · Stats NZ Tatauranga Aotearoa</small>
   </div>
 </header>
@@ -354,14 +368,14 @@ const SA_META = {
     service:   'Statistical_Area_2_2023',
     codeField: 'SA22023_V1_00',
     nameField: 'SA22023_V1_00_NAME',
-    color:     '#c05800', fillColor: '#e07020',
+    color:     '#ffb703', fillColor: '#ffc835',
     desc:      'Statistical Area 2 — roughly 2,000–4,000 people (census reporting unit)',
   },
   SA3: {
     service:   'Statistical_Area_3_2023',
     codeField: 'SA32023_V1_00',
     nameField: 'SA32023_V1_00_NAME',
-    color:     '#1a3faa', fillColor: '#3a65d8',
+    color:     '#063e5a', fillColor: '#1a6090',
     desc:      'Statistical Area 3 — roughly 30,000–100,000 people (aggregated from SA2s)',
   },
 };
@@ -708,7 +722,7 @@ function showBoundaries(level) {
         .filter(f => f.geometry?.rings?.length)
         .map(f => ({ type: 'Feature', geometry: { type: 'Polygon', coordinates: f.geometry.rings }, properties: {} })),
     };
-    const grid = L.geoJSON(fc, { style: { color: '#c05800', weight: 1, opacity: 0.5, fillColor: '#e07020', fillOpacity: 0.04 } });
+    const grid = L.geoJSON(fc, { style: { color: '#ffb703', weight: 1, opacity: 0.5, fillColor: '#ffc835', fillOpacity: 0.04 } });
     grid.addTo(map); state.layerSA2Grid = grid;
 
     const sa3Layer = rings2Layer(state.boundaries.SA3, 'SA3', { fillOpacity: 0.07 });
@@ -724,12 +738,12 @@ function showBoundaries(level) {
 function updateLegend(level) {
   const el   = document.getElementById('mapLegend');
   const rows = level === 'SA2'
-    ? [`<div class="leg-row"><div class="leg-swatch" style="background:rgba(224,112,32,.18);border:2.5px solid #c05800;"></div><span>SA2 boundary</span></div>`]
+    ? [`<div class="leg-row"><div class="leg-swatch" style="background:rgba(255,183,3,.22);border:2.5px solid #ffb703;"></div><span>SA2 boundary</span></div>`]
     : [
-        `<div class="leg-row"><div class="leg-swatch" style="background:rgba(224,112,32,.08);border:1px solid rgba(192,88,0,.5);"></div><span>SA2 areas within SA3</span></div>`,
-        `<div class="leg-row"><div class="leg-swatch" style="background:rgba(58,101,216,.1);border:2.5px solid #1a3faa;"></div><span>SA3 boundary</span></div>`,
+        `<div class="leg-row"><div class="leg-swatch" style="background:rgba(255,183,3,.12);border:1px solid rgba(255,183,3,.6);"></div><span>SA2 areas within SA3</span></div>`,
+        `<div class="leg-row"><div class="leg-swatch" style="background:rgba(6,62,90,.1);border:2.5px solid #063e5a;"></div><span>SA3 boundary</span></div>`,
       ];
-  rows.push(`<div class="leg-row"><div class="leg-swatch" style="width:10px;height:10px;border-radius:50%;background:#e74c3c;flex-shrink:0;"></div><span>Your location</span></div>`);
+  rows.push(`<div class="leg-row"><div class="leg-swatch" style="width:10px;height:10px;border-radius:50%;background:#fb8500;flex-shrink:0;"></div><span>Your location</span></div>`);
   el.innerHTML = rows.join('');
   el.classList.toggle('show', state.lat !== null);
 }
@@ -876,7 +890,7 @@ async function setLocation(lat, lng) {
 
   if (state.userMarker) map.removeLayer(state.userMarker);
   state.userMarker = L.circleMarker([lat, lng], {
-    radius: 7, fillColor: '#e74c3c', color: '#fff', weight: 2, fillOpacity: 1,
+    radius: 7, fillColor: '#fb8500', color: '#fff', weight: 2, fillOpacity: 1,
   }).addTo(map).bindPopup('Your location');
 
   // Step 1 — boundaries
