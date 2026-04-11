@@ -45,6 +45,31 @@ Two JSX files ready to paste into [og-playground.vercel.app](https://og-playgrou
 
 Both output at 1200×630. Paste the raw JSX (no component wrapper) directly into the playground.
 
+## PWA
+
+The app is installable as a Progressive Web App:
+
+| File | Purpose |
+|---|---|
+| `manifest.json` | Web app manifest (name, colors, icons) |
+| `icon.svg` | Maskable source icon — lime-green background, dark map-pin |
+| `icon-192.png` | Rasterised 192×192 (generated from SVG via `rsvg-convert`) |
+| `icon-512.png` | Rasterised 512×512 |
+| `sw.js` | Service worker — cache name `nzstats-v1` |
+
+Service worker fetch strategies:
+- **Network-only:** `*.arcgis.com`, `nominatim.openstreetmap.org` (always live data)
+- **Stale-while-revalidate:** Leaflet/Google Fonts CDN assets
+- **Cache-first:** app shell (`./`, manifest, icons)
+
+To regenerate PNGs after editing `icon.svg`:
+```bash
+rsvg-convert -w 192 -h 192 icon.svg -o icon-192.png
+rsvg-convert -w 512 -h 512 icon.svg -o icon-512.png
+```
+
+Bump the `CACHE` constant in `sw.js` (e.g. `nzstats-v2`) whenever deploying changes that need to invalidate cached files.
+
 ## Key conventions
 
 - No framework, no bundler — edit `index.html` directly

@@ -13,6 +13,7 @@ An interactive map for exploring New Zealand's 2023 Census data.
 - **SA2 / SA3 toggle** — switch between Statistical Area Level 2 and Level 3 boundaries
 - **Census stats panels** — click any area on the map to see 2023 Census statistics including population, dwellings, and demographic breakdowns
 - **Responsive layout** — works on desktop and mobile
+- **Installable PWA** — install to home screen on Android/iOS/desktop; app shell cached for offline use
 
 ## Data Sources
 
