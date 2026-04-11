@@ -1,0 +1,14 @@
+{
+  "name": "NZ Census Explorer",
+  "short_name": "NZStats",
+  "description": "Explore 2023 New Zealand census statistics by location",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1fda2b",
+  "theme_color": "#1fda2b",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

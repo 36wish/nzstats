@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background: lime green, full bleed for maskable -->
+  <rect width="512" height="512" fill="#1fda2b"/>
+  <!-- Map pin: centered at (256, 230), ~200px wide, scaled from 24-unit viewBox -->
+  <!-- Scale factor: ~8.3x (200/24). Translate so pin center is at 256,230 -->
+  <g transform="translate(256, 235)" opacity="0.85">
+    <!-- Scaled map pin: original 24-unit path scaled 8.3x, centered -->
+    <path d="M0,-110 C55,-110 100,-65 100,0 C100,55 0,130 0,130 C0,130 -100,55 -100,0 C-100,-65 -55,-110 0,-110 Z"
+          fill="#0b2200" stroke="none"/>
+    <circle cx="0" cy="0" r="38" fill="#1fda2b"/>
+  </g>
+</svg>
