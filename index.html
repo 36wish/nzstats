@@ -141,8 +141,6 @@ header small {
       cursor: crosshair;
     }
 
-    #map .leaflet-tile-pane { filter: grayscale(80%); }
-
     .map-hint {
       text-align: center; font-size: 0.76rem;
       color: var(--text-light);
@@ -462,8 +460,9 @@ const state = {
 // Map
 // ─────────────────────────────────────────────────────────────────────────────
 const map = L.map('map', { center: [-41.3, 174.0], zoom: 5 });
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   maxZoom: 19,
 }).addTo(map);
 
