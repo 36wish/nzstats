@@ -5,7 +5,7 @@ A single-page app for exploring 2023 New Zealand census statistics by location. 
 ## Stack
 
 - **Single file:** `index.html` — all HTML, CSS, and JS in one file, no build step
-- **Map:** Leaflet 1.9.4 (CDN)
+- **Map:** Leaflet 1.9.4 + MapLibre GL (CDN), OpenFreeMap Positron vector style
 - **Font:** Raleway (Google Fonts)
 - **Data:** Stats NZ ArcGIS REST API (no key required for public endpoints)
 - **Geocoding:** Nominatim / OpenStreetMap
@@ -55,10 +55,10 @@ The app is installable as a Progressive Web App:
 | `icon.svg` | Maskable source icon — lime-green background, dark map-pin |
 | `icon-192.png` | Rasterised 192×192 (generated from SVG via `rsvg-convert`) |
 | `icon-512.png` | Rasterised 512×512 |
-| `sw.js` | Service worker — cache name `nzstats-v1` |
+| `sw.js` | Service worker — cache name `nzstats-v2` |
 
 Service worker fetch strategies:
-- **Network-only:** `*.arcgis.com`, `nominatim.openstreetmap.org` (always live data)
+- **Network-only:** `*.arcgis.com`, `nominatim.openstreetmap.org`, `tiles.openfreemap.org` (always live data)
 - **Stale-while-revalidate:** Leaflet/Google Fonts CDN assets
 - **Cache-first:** app shell (`./`, manifest, icons)
 
