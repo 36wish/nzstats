@@ -1,4 +1,4 @@
-const CACHE = 'nzstats-v1';
+const CACHE = 'nzstats-v2';
 const APP_SHELL = ['./', 'manifest.json', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -19,7 +19,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
   // Network-only: live API data
-  if (url.hostname.endsWith('.arcgis.com') || url.hostname === 'nominatim.openstreetmap.org') {
+  if (url.hostname.endsWith('.arcgis.com') || url.hostname === 'nominatim.openstreetmap.org' || url.hostname === 'tiles.openfreemap.org') {
     return; // fall through to network
   }
 
