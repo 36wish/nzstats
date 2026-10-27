@@ -1,4 +1,4 @@
-const CACHE = 'nzstats-v2';
+const CACHE = 'nzstats-v3';
 const APP_SHELL = ['./', 'manifest.json', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
